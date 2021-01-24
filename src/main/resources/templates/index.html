@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.tymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Movie Review</title>
+<style>
+body {
+	text-align: center;
+}
+
+div {
+	display: inline-block;
+}
+
+#lol {
+	padding: 30px 0px;
+	width: 400px;
+	height: 280px;
+	border: solid;
+}
+
+h3, h2, h1 {
+	text-align: center;
+}
+</style>
+</head>
+
+<body>
+	<h1>MOVIES TO WATCH</h1>
+
+	<h2 style="text-align: center">Available Movies</h2>
+	<div id="all">
+
+		<div></div>
+		<div>
+
+			<table>
+
+				<tr>
+					<td><form id="lol" style="text-align: center" method="post"
+							action="#" th:action="@{/insertReview}" th:object="${movie}">
+
+							<p style="text-align: center; font-size: 20px">Select From
+								Movies Available</p>
+
+							Movie: <select th:field="*{movie}">
+
+								<option th:each="m: *{movies}" th:value="${m}" th:text="${m}" />
+							</select> <br> Streaming Service: <input type="text"
+								th:field="*{streamingService}" /> <br>
+							<input type="HIDDEN" th:field="*{reviewTime}" /><br> 
+					        <input type="HIDDEN" th:field="*{reviewDate}" /><br>
+								  Rating Points:
+							<select th:field="*{point}">
+
+								<option th:each="p:*{points}" th:value="${p}" th:text="${p}" />
+							</select> <br> Review:
+							<textarea th:field="*{review}"></textarea>
+							<br> <br> <input type="submit" value="Add Review" />
+
+							
+
+						</form></td>
+					<td><img th:src="@{/images/thor.jpg}" /></td>
+					<td><img th:src="@{/images/Enola_Holmes_poster.jpeg}" /></td>
+					<td><img th:src="@{/images/220px-Kabir_Singh.jpg}" /></td>
+					<td><img th:src="@{/images/TheNunPoster.jpg}" /></td>
+
+				</tr>
+
+
+			</table>
+
+
+
+		</div>
+		<hr>
+	</div>
+	<h3>Reviews</h3>
+	<table style="text-align: center; width: 100%" border="1">
+
+
+
+		<tr>
+			<th>Movie ID</th>
+			<th>Movie Name</th>
+			<th>Streaming Service</th>
+			<th>Time Of Review</th>
+			<th>Date Of Review</th>
+			<th>Rating Points</th>
+			<th>Add Review</th>
+		<tr>
+		<tr th:each="aMovie:${movieList}">
+			<td th:text="${aMovie.id}">01</td>
+			<td th:text="${aMovie.movie}">Movie Name</td>
+			<td th:text="${aMovie.streamingService}">StreamingService</td>
+		    <td th:text="${aMovie.reviewTime}">Time of Review</td>
+			<td th:text="${aMovie.reviewDate}">Date of Review</td> 
+			<td th:text="${aMovie.point}">Point</td>
+			<td th:text="${aMovie.review}">Add Review</td>
+	</table>
+
+
+
+
+</body>
+</html>
